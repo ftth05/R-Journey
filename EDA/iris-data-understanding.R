@@ -51,8 +51,73 @@ dt %>%
   dplyr::group_by(Species) %>%
   skim()
 
+#############################
+# Quick data visualization
+# R base plot()
+#############################
+
+# Panel plots
+plot(dt)
+plot(dt, col= "red")
+
+# Scatter plot
+
+plot(dt$Sepal.Width, dt$Sepal.Length)
+plot(dt$Sepal.Width, dt$Sepal.Length, col= "red")
+plot(dt$Sepal.Width, dt$Sepal.Length, col = "red", 
+     xlab = "Sepal Width", ylab = "Sepal Length")
+
+# Histogram 
+hist(dt$Sepal.Width, col = "red", main = "Sepal Width Density",
+     xlab = "Sepal Width in cm", freq = T)
+
+# Return Value of hist()
+# https://www.datamentor.io/r-programming/histogram/
+h<- hist(dt$Sepal.Width, main = "Sepal Width main", xlab = " xlab Sepal Width" )
+text(h$mids,h$counts,labels = h$counts, adj = c(0.5, -0.5))
 
 
+hist(dt$Sepal.Width, breaks= 4, col = "darkmagenta", main = "Sepal Width with breaks = 4",
+     xlab = "Sepal Width in cm", freq = T)
+
+hist(dt$Sepal.Width, breaks= 20, col = "darkmagenta", main = "Sepal Width with breaks = 20",
+     xlab = "Sepal Width in cm", freq = T)
+
+
+# Feature plots
+# https://www.machinelearningplus.com/machine-learning/caret-package/
+
+library(caret)
+featurePlot(x = iris[,1:4], 
+            y = iris$Species, 
+            plot = "box",
+            strip=strip.custom(par.strip.text=list(cex=.7)),
+            scales = list(x = list(relation="free"), 
+                          y = list(relation="free")))
+
+
+
+library(ggplot2)
+library(cowplot)
+ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color = Species)) + 
+  theme_cowplot(12)+
+  background_grid()+
+  labs(x= "Sepal Length", y = "Sepal Width",title = "Sepal Width as a Function of Sepal Length",
+       subtitle = "Data from R. A. Fischer's iris dataset, 1936",
+       caption = "Made in R with ggplot2") +
+  theme(text = element_text(size = 12),
+        axis.text = element_text(size = 10),
+        legend.position = "top")+
+  #geom_smooth()+ 
+  geom_point() 
+#geom_line()
+
+
+# minimal horizontal grid theme
+ggplot(iris, aes(Sepal.Length, fill = Species)) + 
+  geom_density(alpha = 0.5) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  theme_minimal_hgrid(12)
 
 
 
