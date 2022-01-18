@@ -7,17 +7,15 @@
 library(datasets) # Contains the Iris data set
 library(caret) # Package for machine learning algorithms / CARET stands for Classification And REgression Training
 
+dir = dirname(rstudioapi::getSourceEditorContext()$path)
+setwd(dir)
+getwd()
 # Importing the Iris data set
 data(iris)
 
 # Check to see if there are missing data?
 sum(is.na(iris))
 
-library(ggplot2)
-library(cowplot)
-ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + 
-  geom_point() +
-  theme_cowplot(12)
 
 # To achieve reproducible model; set the random seed number
 set.seed(100)
@@ -32,13 +30,11 @@ TestingSet <- iris[-TrainingIndex,] # Test Set
 plot(TrainingSet, main = "Training Set", col= "red")
 plot(TestingSet, main = "Testing Set", col= "red")
 
-p1 <- ggplot(mtcars, aes(disp, mpg)) + 
-  geom_point()
-p2 <- ggplot(mtcars, aes(qsec, mpg)) +
-  geom_point()
-
-plot_grid(p1, p2, labels = c('A', 'B'), label_size = 12)
-
+# better visualization
+library(cowplot)
+p1<-ggplot(TrainingSet, aes(Sepal.Length, Sepal.Width))+ geom_point()
+p2<-ggplot(TestingSet, aes(Sepal.Length, Sepal.Width))+ geom_point()
+plot_grid(p1, p2, labels = "AUTO")
 
 
 ###############################
@@ -47,13 +43,14 @@ plot_grid(p1, p2, labels = c('A', 'B'), label_size = 12)
 # Build Training model
 Model <- train(Species ~ ., data = TrainingSet,
                method = "svmPoly",
-               na.action = na.omit,
-               preProcess=c("scale","center"),
+               na.action = na.omit, # if there is  missing value, will be deleted.
+               preProcess=c("scale","center"), # scale data by mean centering
                trControl= trainControl(method="none"),
                tuneGrid = data.frame(degree=1,scale=1,C=1)
 )
 
 # Build CV model
+# see for Cross Validation explanation https://youtu.be/dRqtLxZVRuw?t=625
 Model.cv <- train(Species ~ ., data = TrainingSet,
                   method = "svmPoly",
                   na.action = na.omit,
@@ -78,6 +75,7 @@ print(Model.testing.confusion)
 print(Model.cv.confusion)
 
 # Feature importance
+# https://youtu.be/dRqtLxZVRuw?t=1040
 Importance <- varImp(Model)
 plot(Importance)
 plot(Importance, col = "red")
