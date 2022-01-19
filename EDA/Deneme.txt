@@ -1,0 +1,14 @@
+     Frame           F_Angry          F_Disgusted           F_Afraid           F_Happy        
+ Min.   : 160.0   Min.   :0.000000   Min.   :0.0000000   Min.   :0.000000   Min.   :0.000000  
+ 1st Qu.: 567.8   1st Qu.:0.006294   1st Qu.:0.0000052   1st Qu.:0.007169   1st Qu.:0.004858  
+ Median :1234.5   Median :0.013191   Median :0.0000893   Median :0.022733   Median :0.010971  
+ Mean   :1268.8   Mean   :0.044283   Mean   :0.0045906   Mean   :0.065136   Mean   :0.040407  
+ 3rd Qu.:1928.2   3rd Qu.:0.029775   3rd Qu.:0.0004702   3rd Qu.:0.070460   3rd Qu.:0.024033  
+ Max.   :2362.0   Max.   :0.999952   Max.   :0.7198792   Max.   :0.800462   Max.   :0.999793  
+     F_Sad          F_Surprised          F_Neutral        
+ Min.   :0.00000   Min.   :0.0000000   Min.   :0.0000297  
+ 1st Qu.:0.03477   1st Qu.:0.0002588   1st Qu.:0.6191592  
+ Median :0.08741   Median :0.0007482   Median :0.8167865  
+ Mean   :0.12508   Mean   :0.0039685   Mean   :0.7165372  
+ 3rd Qu.:0.16745   3rd Qu.:0.0016028   3rd Qu.:0.9048621  
+ Max.   :0.74923   Max.   :0.3434051   Max.   :0.9999609  
