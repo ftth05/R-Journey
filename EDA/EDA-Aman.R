@@ -1,4 +1,3 @@
-install.packages("swirl")
 
 library(lubridate)
 a= read.csv("7EmotionsBench.csv")
